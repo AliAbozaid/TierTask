@@ -1,12 +1,10 @@
 import dependencies.DebugDependencies
 import dependencies.NavigationDependencies
-import dependencies.KoinDependencies
 import extensions.addTestsDependencies
-import extensions.api
-import extensions.buildConfigStringField
 import extensions.debugImplementation
 import extensions.implementation
-import extensions.kapt
+import extensions.buildConfigStringField
+import dependencies.KoinDependencies
 
 plugins {
 	id("com.android.library")
@@ -31,6 +29,7 @@ android {
 
 	buildTypes {
 		getByName(BuildType.DEBUG) {
+			buildConfigStringField("PAGER_ID", "5fa8ff8dbd01877eecdb898f")
 		}
 		getByName(BuildType.RELEASE) {
 			isMinifyEnabled = true
@@ -38,6 +37,7 @@ android {
 				getDefaultProguardFile(AppConfig.proguardConsumerRules),
 				AppConfig.proguardRules
 			)
+			buildConfigStringField("PAGER_ID", "5fa8ff8dbd01877eecdb898f")
 		}
 	}
 
@@ -74,9 +74,6 @@ dependencies {
 	implementation(project(":navigation"))
 	implementation(project(":common"))
 	implementation(project(":feature:details"))
-
-	api(AppDependencies.MOSHI)
-	kapt(AppDependencies.MOSHI_CODEGEN)
 	implementation(KoinDependencies.KOIN_LIBRARIES)
 	implementation(AppDependencies.COROUTINES_LIBRARIES)
 	implementation(NavigationDependencies.NAVIGATION_LIBRARIES)

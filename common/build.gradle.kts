@@ -1,12 +1,17 @@
 import dependencies.DebugDependencies
 import dependencies.NavigationDependencies
+import dependencies.NetworkDependencies
 import dependencies.LifecycleDependencies
 import extensions.addTestsDependencies
 import extensions.implementation
+import extensions.api
+import dependencies.KoinDependencies
+import extensions.kapt
 
 plugins {
     id("com.android.library")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -66,6 +71,11 @@ dependencies {
     api(AppDependencies.PLAY_SERVICES_LOCATION)
     api(AppDependencies.GOOGLE_MAPS_UTILS)
     api(AppDependencies.GOOGLE_MAPS)
+    api(NetworkDependencies.MOSHI)
+    kapt(NetworkDependencies.MOSHI_CODEGEN)
+    api(NetworkDependencies.OKHTTP_LIBRARIES)
+    api(NetworkDependencies.RETROFIT_LIBRARIES)
+    api(KoinDependencies.KOIN_LIBRARIES)
     implementation(LifecycleDependencies.LIFE_CYCLE_LIBRARIES)
     implementation(NavigationDependencies.NAVIGATION_LIBRARIES)
     implementation(AppDependencies.CONSTRAINT_LAYOUT)

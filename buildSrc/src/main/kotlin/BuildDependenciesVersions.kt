@@ -14,6 +14,8 @@ object BuildDependenciesVersions {
     const val APPCOMPAT = "1.3.0"
     const val MATERIAL = "1.5.0-alpha04"
     const val MOSHI = "1.13.0"
+    const val OKHTTP = "4.9.3"
+    const val RETROFIT = "2.9.0"
     const val PLAY_SERVICES = "19.0.1"
     const val GOOGLE_MAPS_UTILS = "0.6.2"
     const val GOOGLE_MAPS = "18.0.2"
