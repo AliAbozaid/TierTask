@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<lint>
+
+	<!--
+	False positive
+	-->
+	<issue id="PluralsCandidate" severity="ignore" />
+
+	<issue id="VectorPath" severity="ignore" />
+	<issue id="ConvertToWebp" severity="ignore" />
+	<issue id="VectorRaster" severity="ignore" />
+	<issue id="ResourceType" severity="ignore" />
+	<issue id="StaticFieldLeak" severity="ignore" />
+	<issue id="InvalidNavigation" severity="ignore" />
+
+	<issue id="IconLocation" severity="ignore">
+		<!--
+		Demo purpose
+		-->
+		<ignore path="res/drawable/landscape.jpg"/>
+	</issue>
+
+	<!--
+	False positive
+	-->
+	<issue id="Overdraw" severity="ignore" />
+
+	<issue id="TypographyDashes" severity="ignore" />
+	<issue id="TypographyEllipsis" severity="ignore" />
+	<issue id="Typos" severity="ignore" />
+	<issue id="MissingTranslation" severity="ignore" />
+	<issue id="MissingDefaultResource" severity="ignore" />
+	<issue id="ExtraTranslation" severity="ignore" />
+	<issue id="GradleDependency" severity="informational" />
+	<issue id="UnusedResources" severity="informational" />
+	<issue id="MergeRootFrame" severity="informational" />
+	<issue id="RtlSymmetry" severity="informational" />
+	<issue id="LockedOrientationActivity" severity="ignore" />
+	<issue id="NullSafeMutableLiveData" severity="ignore" />
+	<issue id="IconDensities" severity="ignore" />
+	<issue id="ButtonCase" severity="ignore" />
+
+</lint>
