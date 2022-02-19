@@ -4,6 +4,7 @@ import app.tier.map.BuildConfig
 import app.tier.map.data.client.MapApi
 import app.tier.map.data.mapper.mapToCurrent
 import app.tier.map.domain.model.Current
+import app.tier.map.domain.repo.MapRepository
 
 class MapRepositoryImpl constructor(
     private val mapApi: MapApi

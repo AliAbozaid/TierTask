@@ -1,4 +1,4 @@
-package app.tier.map.data.repository
+package app.tier.map.domain.repo
 
 import app.tier.map.domain.model.Current
 
