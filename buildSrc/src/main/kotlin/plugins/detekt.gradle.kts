@@ -1,40 +1,32 @@
 package plugins
 
+import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektPlugin
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 
 apply<DetektPlugin>()
 
 configure<DetektExtension> {
-    input = project.files(
-        "src/main/kotlin", "app/src/main/java",
-        "core/src/main/java",
-        "network/src/main/java"
+    source = project.files(
+        "src/main/kotlin", "app/src/main/kotlin",
+        "feature/map/src/main/kotlin",
+        "common/src/main/kotlin"
     )
     config = files("$rootDir/.detekt/detekt.yml")
     parallel = true
     ignoredBuildTypes = listOf("release")
     ignoredFlavors = listOf("staging", "production")
+}
+
+tasks.withType<Detekt>().configureEach {
     reports {
         xml {
-            enabled = true
-            destination = file("build/reports/detekt.xml")
+            required.set(true)
+            outputLocation.set(file("build/reports/detekt.xml"))
         }
         html {
-            enabled = true
-            destination = file("build/reports/detekt.html")
-        }
-        txt {
-            enabled = true
-            destination = file("build/reports/detekt.txt")
-        }
-        sarif {
-            enabled = true
-            destination = file("build/reports/detekt.sarif")
-        }
-        custom {
-            reportId = "CustomJsonReport"
-            destination = file("build/reports/detekt.json")
+            required.set(true)
+            outputLocation.set(file("build/reports/detekt.html"))
         }
     }
 }
