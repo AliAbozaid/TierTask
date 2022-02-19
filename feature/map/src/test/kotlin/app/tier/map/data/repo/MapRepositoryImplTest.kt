@@ -6,6 +6,7 @@ import app.tier.map.data.entity.DataEntity
 import app.tier.map.data.entity.MapEntity
 import app.tier.map.data.entity.StatsEntity
 import app.tier.map.data.repository.MapRepositoryImpl
+import app.tier.map.domain.repo.MapRepository
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -14,7 +15,7 @@ import org.junit.Before
 import org.junit.Test
 
 class MapRepositoryImplTest {
-    private lateinit var mapRepository: MapRepositoryImpl
+    private lateinit var mapRepository: MapRepository
     private val mapApi: MapApi = mockk(relaxed = true)
 
     private val currents = mutableListOf<CurrentEntity>()
@@ -51,13 +52,13 @@ class MapRepositoryImplTest {
 
     @Before
     fun setUp() {
+        coEvery { mapApi.getTierVehicles(any()) }.returns(mapEntity)
+        mapRepository = MapRepositoryImpl(mapApi)
     }
 
     @Test
     fun `given getTierVehicles when called from repo then it get called from client`() =
         runBlockingTest {
-            coEvery { mapApi.getTierVehicles(any()) }.returns(mapEntity)
-            mapRepository = MapRepositoryImpl(mapApi)
             mapRepository.getTierVehicles()
             coVerify {
                 mapApi.getTierVehicles(any())
