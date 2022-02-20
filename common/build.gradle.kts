@@ -6,6 +6,7 @@ import extensions.addTestsDependencies
 import extensions.implementation
 import extensions.api
 import dependencies.KoinDependencies
+import extensions.buildConfigStringField
 import extensions.kapt
 
 plugins {
@@ -30,12 +31,15 @@ android {
     }
 
     buildTypes {
-        getByName(BuildType.DEBUG) {}
+        getByName(BuildType.DEBUG) {
+            buildConfigStringField("BASE_URL", "https://api.jsonbin.io/")
+        }
         getByName(BuildType.RELEASE) {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile(AppConfig.proguardConsumerRules), AppConfig.proguardRules
             )
+            buildConfigStringField("BASE_URL", "https://api.jsonbin.io/")
         }
     }
 

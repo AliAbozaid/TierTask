@@ -1,5 +1,7 @@
 package app.tier.map.domain.model
 
+import com.google.android.gms.maps.model.LatLng
+
 data class Current(
     val id: String?,
     val vehicleId: String?,
@@ -12,6 +14,5 @@ data class Current(
     val state: String?,
     val model: String?,
     val fleetBirdId: Int?,
-    val latitude: Double?,
-    val longitude: Double?
+    val position: LatLng?
 )

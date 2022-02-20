@@ -2,6 +2,7 @@ package app.tier.map.data.mapper
 
 import app.tier.map.data.entity.CurrentEntity
 import app.tier.map.domain.model.Current
+import com.google.android.gms.maps.model.LatLng
 
 fun CurrentEntity.mapToCurrent(): Current =
     Current(
@@ -16,6 +17,5 @@ fun CurrentEntity.mapToCurrent(): Current =
         state = state,
         model = model,
         fleetBirdId = fleetBirdId,
-        latitude = latitude,
-        longitude = longitude
+        position = LatLng(latitude ?: 0.0, longitude ?: 0.0)
     )

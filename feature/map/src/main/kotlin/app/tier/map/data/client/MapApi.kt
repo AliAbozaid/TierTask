@@ -6,6 +6,6 @@ import retrofit2.http.Path
 
 interface MapApi {
 
-    @GET("b/{pageID}}")
+    @GET("b/{pageID}")
     suspend fun getTierVehicles(@Path("pageID") pageID: String): MapEntity
 }
