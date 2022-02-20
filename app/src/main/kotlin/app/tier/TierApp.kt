@@ -2,6 +2,10 @@ package app.tier
 
 import android.app.Application
 import app.tier.di.appModule
+import app.tier.di.networkModule
+import app.tier.map.data.di.dataModule
+import app.tier.map.domain.di.domainModule
+import app.tier.map.presentation.di.viewModelsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -17,7 +21,11 @@ class TierApp : Application() {
             androidContext(this@TierApp)
             modules(
                 listOf(
-                    appModule
+                    appModule,
+                    networkModule,
+                    dataModule,
+                    domainModule,
+                    viewModelsModule
                 )
             )
         }

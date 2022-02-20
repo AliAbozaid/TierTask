@@ -1,5 +1,6 @@
 <resources>
 	<string name="app_name">Tier</string>
 	<string name="google_map_key">AIzaSyBVPqFQj5jfEB0x2GK44h5xIpxJ-T-mo1M</string>
+	<string name="secret_key">$2b$10$VE0tRqquld4OBl7LDeo9v.afsyRXFlXcQzmj1KpEB6K1wG2okzQcK</string>
 
 </resources>

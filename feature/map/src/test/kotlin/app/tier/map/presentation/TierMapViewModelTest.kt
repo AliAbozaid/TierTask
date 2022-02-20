@@ -1,8 +1,10 @@
-package app.tier.map.domain
+package app.tier.map.presentation
 
-import app.tier.map.data.repository.MapRepositoryImpl
+import app.tier.map.base.DispatcherImplTest
+import app.tier.map.domain.MapUseCase
 import app.tier.map.domain.model.Current
 import app.tier.utils.Resource
+import app.tier.utils.ResourceUi
 import com.google.android.gms.maps.model.LatLng
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -10,12 +12,12 @@ import io.mockk.mockk
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.MatcherAssert
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Test
 
-class MapUseCaseTest {
-    private lateinit var mapUseCase: MapUseCase
-    private val mapRepository: MapRepositoryImpl = mockk(relaxed = true)
+class TierMapViewModelTest {
+    private lateinit var tierMapViewModel: TierMapViewModel
+    private val mapUseCase: MapUseCase = mockk(relaxed = true)
+    private val dispatcher = DispatcherImplTest()
 
     private val currents = mutableListOf<Current>()
         .apply {
@@ -37,30 +39,32 @@ class MapUseCaseTest {
             )
         }
 
-    @Before
-    fun setUp() {
-        mapUseCase = MapUseCase(mapRepository)
-    }
-
     @Test
-    fun `given getTierVehicles when called from usecase then it get called from client`() =
-        runBlockingTest {
-            mapUseCase.getTierVehicles()
-            coVerify {
-                mapRepository.getTierVehicles()
-            }
-        }
+    fun `when viewModel initiated then getTierVehicles called from useCase`() {
+        coEvery { mapUseCase.getTierVehicles() }.returns(
+            Resource.Success(
+                currents
+            )
+        )
+        tierMapViewModel = TierMapViewModel(mapUseCase, dispatcher)
+        coVerify { mapUseCase.getTierVehicles() }
+    }
 
     @Test
     fun `given getTierVehicles called when success then it should return success`() =
         runBlockingTest {
-            coEvery { mapRepository.getTierVehicles() }.returns(currents)
+            coEvery { mapUseCase.getTierVehicles() }.returns(
+                Resource.Success(
+                    currents
+                )
+            )
+            tierMapViewModel = TierMapViewModel(mapUseCase, dispatcher)
             MatcherAssert.assertThat(
                 "",
-                mapUseCase.getTierVehicles() is Resource.Success
+                tierMapViewModel.vehiclesStateFlow.value is ResourceUi.Success
             )
             Assert.assertEquals(
-                (mapUseCase.getTierVehicles() as Resource.Success).data,
+                (tierMapViewModel.vehiclesStateFlow.value as ResourceUi.Success).data,
                 currents
             )
         }
@@ -68,17 +72,19 @@ class MapUseCaseTest {
     @Test
     fun `given getTierVehicles called when error then it should return error`() =
         runBlockingTest {
-            coEvery { mapRepository.getTierVehicles() }.throws(
-                Throwable(
-                    ERROR_MESSAGE
-                )
+            coEvery { mapUseCase.getTierVehicles() }.returns(
+                Resource.Error(Throwable(ERROR_MESSAGE))
             )
+            tierMapViewModel = TierMapViewModel(mapUseCase, dispatcher)
             MatcherAssert.assertThat(
                 "",
-                mapUseCase.getTierVehicles() is Resource.Error
+                tierMapViewModel.vehiclesStateFlow.value is ResourceUi.Failure
             )
             Assert.assertEquals(
-                (mapUseCase.getTierVehicles() as Resource.Error).throwable.message,
+                (
+                    tierMapViewModel.vehiclesStateFlow.value
+                        as ResourceUi.Failure
+                    ).error.message,
                 ERROR_MESSAGE
             )
         }
