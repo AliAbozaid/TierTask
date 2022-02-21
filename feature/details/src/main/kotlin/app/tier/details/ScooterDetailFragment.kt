@@ -69,11 +69,11 @@ class ScooterDetailFragment : BottomSheetDialogFragment() {
             R.string.scooter_details_battery,
             args.scooter.battery
         )
-        binding.state.text = getString(
+        binding.state.text = args.scooter.state
+        binding.model.text = getString(
             R.string.scooter_details_model,
-            args.scooter.state
+            args.scooter.model
         )
-        binding.model.text = args.scooter.model
 
         binding.navigation.setOnClickListener {
             val intent = Intent(
