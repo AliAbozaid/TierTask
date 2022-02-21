@@ -1,5 +1,6 @@
 package app.tier.map.presentation.cluster
 
+import app.tier.model.BatteryStatus
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 
@@ -22,6 +23,7 @@ class VehicleClusterItem constructor(
     val model: String?
     val distance: String?
     val fleetBirdId: Int?
+    val batteryStatus: BatteryStatus?
 
     init {
         this.vehicleId = builder.vehicleId
@@ -35,6 +37,7 @@ class VehicleClusterItem constructor(
         this.model = builder.model
         this.fleetBirdId = builder.fleetBirdId
         this.distance = builder.distance
+        this.batteryStatus = builder.batteryStatus
     }
 
     class Builder constructor(
@@ -54,6 +57,7 @@ class VehicleClusterItem constructor(
         var model: String? = null
         var distance: String? = null
         var fleetBirdId: Int? = null
+        var batteryStatus: BatteryStatus? = null
 
         fun vehicleId(vehicleId: String) = apply { this.vehicleId = vehicleId }
         fun hardwareId(hardwareId: String) =
@@ -73,6 +77,9 @@ class VehicleClusterItem constructor(
         fun state(state: String) = apply { this.state = state }
         fun model(model: String) = apply { this.model = model }
         fun distance(distance: String?) = apply { this.distance = distance }
+        fun batteryStatus(batteryStatus: BatteryStatus?) =
+            apply { this.batteryStatus = batteryStatus }
+
         fun fleetBirdId(fleetBirdId: Int) =
             apply { this.fleetBirdId = fleetBirdId }
 

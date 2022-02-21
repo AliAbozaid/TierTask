@@ -2,7 +2,8 @@ package app.tier.map.presentation
 
 import app.tier.map.base.DispatcherImplTest
 import app.tier.map.domain.MapUseCase
-import app.tier.map.domain.model.Current
+import app.tier.model.BatteryStatus
+import app.tier.model.Current
 import app.tier.utils.Resource
 import app.tier.utils.ResourceUi
 import com.google.android.gms.maps.model.LatLng
@@ -34,7 +35,8 @@ class TierMapViewModelTest {
                     state = "ACTIVE",
                     model = "AB",
                     fleetBirdId = 118160,
-                    position = LatLng(52.506731, 13.289618)
+                    position = LatLng(52.506731, 13.289618),
+                    batteryStatus = BatteryStatus.BATTERY_10
                 )
             )
         }

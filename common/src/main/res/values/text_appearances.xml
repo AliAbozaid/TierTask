@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="TextAppearance.Tier.Scooter.Details" parent="TextAppearance.MaterialComponents.Body1">
+		<item name="android:textSize">@dimen/text_14</item>
+		<item name="android:textColor">@color/app_toolbar_text</item>
+		<item name="android:letterSpacing">0.01</item>
+	</style>
+
+</resources>

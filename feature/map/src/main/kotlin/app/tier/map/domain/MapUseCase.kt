@@ -1,7 +1,7 @@
 package app.tier.map.domain
 
-import app.tier.map.domain.model.Current
 import app.tier.map.domain.repo.MapRepository
+import app.tier.model.Current
 import app.tier.utils.Resource
 
 class MapUseCase constructor(

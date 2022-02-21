@@ -3,8 +3,8 @@ package app.tier.map.data.repository
 import app.tier.map.BuildConfig
 import app.tier.map.data.client.MapApi
 import app.tier.map.data.mapper.mapToCurrent
-import app.tier.map.domain.model.Current
 import app.tier.map.domain.repo.MapRepository
+import app.tier.model.Current
 
 class MapRepositoryImpl constructor(
     private val mapApi: MapApi

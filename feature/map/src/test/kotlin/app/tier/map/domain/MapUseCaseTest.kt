@@ -1,7 +1,8 @@
 package app.tier.map.domain
 
 import app.tier.map.data.repository.MapRepositoryImpl
-import app.tier.map.domain.model.Current
+import app.tier.model.BatteryStatus
+import app.tier.model.Current
 import app.tier.utils.Resource
 import com.google.android.gms.maps.model.LatLng
 import io.mockk.coEvery
@@ -32,7 +33,8 @@ class MapUseCaseTest {
                     state = "ACTIVE",
                     model = "AB",
                     fleetBirdId = 118160,
-                    position = LatLng(52.506731, 13.289618)
+                    position = LatLng(52.506731, 13.289618),
+                    batteryStatus = BatteryStatus.BATTERY_0
                 )
             )
         }

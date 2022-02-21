@@ -10,11 +10,14 @@ import android.widget.RelativeLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import app.tier.details.ScooterDetailFragmentArgs
 import app.tier.map.R
 import app.tier.map.databinding.FragmentTierMapBinding
 import app.tier.map.presentation.cluster.MapBoundMeasurements
 import app.tier.map.presentation.cluster.MarkerClusterRenderer
 import app.tier.map.presentation.cluster.VehicleClusterItem
+import app.tier.model.Current
 import app.tier.utils.Permission
 import app.tier.utils.ResourceUi
 import app.tier.utils.bitmapDescriptorFromVector
@@ -75,6 +78,12 @@ class TierMapFragment : Fragment(R.layout.fragment_tier_map) {
         }
     }
 
+    override fun onDestroy() {
+        googleMap?.clear()
+        mapFragment?.onDestroy()
+        super.onDestroy()
+    }
+
     override fun onActivityResult(
         requestCode: Int,
         resultCode: Int,
@@ -103,12 +112,13 @@ class TierMapFragment : Fragment(R.layout.fragment_tier_map) {
             zoomToBound(cluster.items.toList())
             true
         }
-        clusterManager.setOnClusterItemClickListener { hotelClusterItem ->
-            val marker = clusterRenderer.getMarker(hotelClusterItem)
+        clusterManager.setOnClusterItemClickListener { vehicleClusterItem ->
+            val marker = clusterRenderer.getMarker(vehicleClusterItem)
             zoom(
                 marker.position,
                 MAP_ZOOM_LEVEL_BIG
             )
+            openDetails(viewModel.getScooter(vehicleClusterItem))
             // TODO open details
             // TODO tracking
             false
@@ -141,13 +151,21 @@ class TierMapFragment : Fragment(R.layout.fragment_tier_map) {
      * To be visible at all times as the guideline
      */
     private fun relocateGoogleWaterMark() {
-        val googleLogo = mapFragment?.view?.findViewWithTag<View>(TAG_GOOGLE_WATER_MARK)
-        val glLayoutParams = googleLogo?.layoutParams as RelativeLayout.LayoutParams
+        val googleLogo =
+            mapFragment?.view?.findViewWithTag<View>(TAG_GOOGLE_WATER_MARK)
+        val glLayoutParams =
+            googleLogo?.layoutParams as RelativeLayout.LayoutParams
         glLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0)
         glLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, 0)
         glLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_START, 0)
-        glLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE)
-        glLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE)
+        glLayoutParams.addRule(
+            RelativeLayout.ALIGN_PARENT_TOP,
+            RelativeLayout.TRUE
+        )
+        glLayoutParams.addRule(
+            RelativeLayout.ALIGN_PARENT_END,
+            RelativeLayout.TRUE
+        )
         googleLogo.layoutParams = glLayoutParams
     }
 
@@ -276,10 +294,13 @@ class TierMapFragment : Fragment(R.layout.fragment_tier_map) {
         }
     }
 
-    override fun onDestroy() {
-        googleMap?.clear()
-        mapFragment?.onDestroy()
-        super.onDestroy()
+    private fun openDetails(current: Current) {
+        findNavController().navigate(
+            R.id.scooter_details_navigation,
+            ScooterDetailFragmentArgs(
+                scooter = current
+            ).toBundle()
+        )
     }
 
     companion object {
