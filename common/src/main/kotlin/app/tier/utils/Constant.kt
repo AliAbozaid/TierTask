@@ -7,4 +7,8 @@ object Constant {
     object Network {
         const val DEFAULT_TIMEOUT = 90L
     }
+
+    object Cluster {
+        const val KM = 1000.0
+    }
 }

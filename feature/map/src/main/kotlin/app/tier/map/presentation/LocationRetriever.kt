@@ -23,8 +23,12 @@ class LocationRetriever(context: Context) {
         fastestInterval = FAST_INTERVAL
     }
 
-    private val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
-    private val builder: LocationSettingsRequest = LocationSettingsRequest.Builder().addLocationRequest(locationRequest).build()
+    private val fusedLocationProviderClient =
+        LocationServices.getFusedLocationProviderClient(context)
+    private val builder: LocationSettingsRequest =
+        LocationSettingsRequest.Builder()
+            .addLocationRequest(locationRequest)
+            .build()
     private val settingsClient = LocationServices.getSettingsClient(context)
     lateinit var startSettingActivity: (ResolvableApiException) -> Unit
     var onLocationFound: ((ResourceUi<Location>) -> Unit)? = null
@@ -109,6 +113,7 @@ class LocationRetriever(context: Context) {
     companion object {
         const val INTERVAL = 20000L
         const val FAST_INTERVAL = 5000L
-        private const val SETTINGS_CHANGE_UNAVAILABLE_MESSAGE = "settings change is not available"
+        private const val SETTINGS_CHANGE_UNAVAILABLE_MESSAGE =
+            "settings change is not available"
     }
 }

@@ -64,8 +64,8 @@ class TierMapViewModelTest {
                 tierMapViewModel.vehiclesStateFlow.value is ResourceUi.Success
             )
             Assert.assertEquals(
-                (tierMapViewModel.vehiclesStateFlow.value as ResourceUi.Success).data,
-                currents
+                (tierMapViewModel.vehiclesStateFlow.value as ResourceUi.Success).data.first().id,
+                currents.first().id
             )
         }
 
