@@ -6,16 +6,16 @@ import com.google.android.gms.maps.model.LatLng
 
 fun CurrentEntity.mapToCurrent(): Current =
     Current(
-        id = id,
-        vehicleId = vehicleId,
-        hardwareId = hardwareId,
-        zoneId = zoneId,
-        resolution = resolution,
-        resolvedBy = resolvedBy,
-        resolvedAt = resolvedAt,
-        battery = battery,
-        state = state,
-        model = model,
-        fleetBirdId = fleetBirdId,
+        id = id.orEmpty(),
+        vehicleId = vehicleId.orEmpty(),
+        hardwareId = hardwareId.orEmpty(),
+        zoneId = zoneId.orEmpty(),
+        resolution = resolution.orEmpty(),
+        resolvedBy = resolvedBy.orEmpty(),
+        resolvedAt = resolvedAt.orEmpty(),
+        battery = battery ?: 0,
+        state = state.orEmpty(),
+        model = model.orEmpty(),
+        fleetBirdId = fleetBirdId ?: 0,
         position = LatLng(latitude ?: 0.0, longitude ?: 0.0)
     )

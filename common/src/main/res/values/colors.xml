@@ -5,5 +5,6 @@
 	<color name="ghost">#C1C7D0</color>
 	<color name="background">@color/white</color>
 	<color name="app_toolbar_text">@color/black</color>
+	<color name="ic_marker_color">#FF101C4F</color>
 
 </resources>

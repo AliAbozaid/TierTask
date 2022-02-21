@@ -2,5 +2,10 @@
 	<string name="app_name">Tier</string>
 	<string name="google_map_key">AIzaSyBVPqFQj5jfEB0x2GK44h5xIpxJ-T-mo1M</string>
 	<string name="secret_key">$2b$10$VE0tRqquld4OBl7LDeo9v.afsyRXFlXcQzmj1KpEB6K1wG2okzQcK</string>
+	<string name="location_permission_message">The permission is required to be able to use the app properly</string>
+	<string name="location_gps_not_enabled">Couldn\'t retrieve your location</string>
+	<string name="internet_connection">Please check your internet connection</string>
+	<string name="snackbar_button">Ok</string>
+	<string name="reload">Reload</string>
 
 </resources>
