@@ -1,6 +1,6 @@
 package app.tier.map.domain.repo
 
-import app.tier.map.domain.model.Current
+import app.tier.model.Current
 
 interface MapRepository {
     suspend fun getTierVehicles(): List<Current>

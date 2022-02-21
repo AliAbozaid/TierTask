@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+	<TextView
+		android:id="@+id/title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/space_16"
+		android:layout_marginTop="@dimen/space_16"
+		android:drawablePadding="@dimen/space_8"
+		android:gravity="center"
+		android:textAppearance="@style/TextAppearance.Tier.Scooter.Details.Title"
+		app:drawableStartCompat="@drawable/ic_scooter"
+		app:drawableTint="@color/app_toolbar_text"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		tools:text="TierN" />
+
+	<ImageView
+		android:id="@+id/batteryIcon"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/space_16"
+		app:layout_constraintEnd_toStartOf="@+id/battery"
+		app:layout_constraintHorizontal_chainStyle="packed"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/title"
+		app:drawableTint="@color/app_toolbar_text"
+		tools:src="@drawable/battery_0" />
+
+	<TextView
+		android:id="@+id/battery"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/space_16"
+		android:textAppearance="@style/TextAppearance.Tier.Scooter.Details.Title"
+		app:layout_constraintBottom_toBottomOf="@+id/batteryIcon"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toEndOf="@+id/batteryIcon"
+		app:layout_constraintTop_toTopOf="@+id/batteryIcon"
+		tools:text="TierN" />
+
+	<TextView
+		android:id="@+id/state"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/space_16"
+		android:layout_marginTop="@dimen/space_16"
+		android:textAppearance="@style/TextAppearance.Tier.Scooter.Details.Title"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/battery"
+		tools:text="TierN" />
+
+	<TextView
+		android:id="@+id/model"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/space_16"
+		android:layout_marginTop="@dimen/space_16"
+		android:textAppearance="@style/TextAppearance.Tier.Scooter.Details.Title"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/state"
+		tools:text="TierN" />
+
+	<TextView
+		android:id="@+id/navigation"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/space_16"
+		android:layout_marginTop="@dimen/space_16"
+		android:layout_marginBottom="@dimen/space_16"
+		android:textAppearance="@style/TextAppearance.Tier.Scooter.Details.Title"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/model"
+		android:text="@string/navigation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

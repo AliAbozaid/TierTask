@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.tier.map.domain.MapUseCase
 import app.tier.map.presentation.cluster.VehicleClusterItem
+import app.tier.map.presentation.cluster.toScooter
 import app.tier.map.presentation.cluster.toVehicleClusterItem
+import app.tier.model.Current
 import app.tier.utils.Dispatcher
 import app.tier.utils.Resource
 import app.tier.utils.ResourceUi
@@ -52,4 +54,7 @@ class TierMapViewModel constructor(
             }
         }
     }
+
+    fun getScooter(vehicleClusterItem: VehicleClusterItem): Current =
+        vehicleClusterItem.toScooter()
 }

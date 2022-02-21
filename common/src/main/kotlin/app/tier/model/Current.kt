@@ -1,10 +1,13 @@
-package app.tier.map.domain.model
+package app.tier.model
 
+import android.os.Parcelable
 import app.tier.utils.Constant
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.SphericalUtil
 import kotlin.math.roundToInt
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Current(
     val id: String,
     val vehicleId: String,
@@ -17,8 +20,9 @@ data class Current(
     val state: String,
     val model: String,
     val fleetBirdId: Int,
-    val position: LatLng
-) {
+    val position: LatLng,
+    val batteryStatus: BatteryStatus,
+) : Parcelable {
     fun getTitle(currentLocation: LatLng?): String =
         if (currentLocation == null) {
             String.format("%d %%", battery)
