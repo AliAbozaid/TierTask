@@ -229,7 +229,6 @@ class TierMapFragment : Fragment(R.layout.fragment_tier_map) {
                 measurements.padding
             )
         )
-        googleMap?.setMinZoomPreference(MAP_ZOOM_LEVEL)
     }
 
     private fun zoom(latLng: LatLng, zoomLevel: Float) {
