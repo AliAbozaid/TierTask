@@ -19,6 +19,7 @@ object BuildDependenciesVersions {
     const val PLAY_SERVICES = "19.0.1"
     const val GOOGLE_MAPS_UTILS = "0.6.2"
     const val GOOGLE_MAPS = "18.0.2"
+    const val FIREBASE = "28.2.0"
 
     const val JUNIT = "4.13.2"
     const val ANDROIDX_JUNIT = "1.1.3"

@@ -1,19 +1,27 @@
 import dependencies.DebugDependencies
 import dependencies.KoinDependencies
+import dependencies.FirebaseDependencies
 import dependencies.NavigationDependencies
 import extensions.addTestsDependencies
 import extensions.implementation
 
 
-val buildVersionCode = Integer.parseInt(System.getenv("VERSION_CODE") ?: "1")
-val buildVersionName = System.getenv("VERSION_NAME") ?: "0.0.1"
+val buildVersionCode = Integer.parseInt(System.getenv("versionCode") ?: "1")
+val buildVersionName = System.getenv("versionName") ?: "0.0.1"
+val firebaseAppId = System.getenv("FIREBASE_APP_ID") ?: ""
+val releaseNotes = System.getenv("RELEASE_NOTES") ?: ""
+val buildTypeName = System.getenv("build_type") ?: ""
 
 plugins {
 	id("com.android.application")
 	kotlin("android")
 	id("kotlin-android")
 	kotlin("kapt")
+	id("com.google.gms.google-services")
+	id("androidx.navigation.safeargs.kotlin")
 	id("kotlin-parcelize")
+	id("com.google.firebase.crashlytics")
+	id("com.google.firebase.appdistribution")
 }
 
 android {
@@ -34,14 +42,23 @@ android {
 
 	signingConfigs {
 		getByName("debug") {
-			storeFile = file("debug.keystore")
+			storeFile = file("../debug.keystore")
 			keyAlias = "androiddebugkey"
 			keyPassword = "android"
 			storePassword = "android"
+
+			firebaseAppDistribution {
+				appId = firebaseAppId
+				groups = "Test"
+				releaseNotesFile = releaseNotes
+			}
 		}
 
 		create("release") {
-
+			storeFile = file("../release.keystore")
+			storePassword = "Tier123"
+			keyAlias = "Tier"
+			keyPassword = "Tier123"
 		}
 	}
 
@@ -49,6 +66,7 @@ android {
 		getByName("debug") {
 			isDebuggable = true
 			applicationIdSuffix = ".debug"
+			signingConfig = signingConfigs.getByName("debug")
 		}
 		getByName("release") {
 			isMinifyEnabled = true
@@ -98,6 +116,8 @@ dependencies {
 	implementation(project(":common"))
 	implementation(project(":feature:map"))
 	implementation(AppDependencies.KOTLIN)
+	implementation(platform(FirebaseDependencies.FIREBASE_BOM))
+	implementation(FirebaseDependencies.FIREBASE_LIBRARIES)
 
 	// Presentation
 	implementation(NavigationDependencies.NAVIGATION_LIBRARIES)

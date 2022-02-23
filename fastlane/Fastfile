@@ -1,0 +1,52 @@
+import "PreBuildLanes.rb"
+import "BuildLanes.rb"
+import "PostBuildLanes.rb"
+
+before_all do |lane, options|
+  if is_ci
+    cleanRepo()
+    puts `git status`
+    ensure_git_status_clean(show_uncommitted_changes: true)
+  end
+end
+
+#send slack message after success build
+after_all do |lane, options|
+
+  if lane.to_s=="publish"
+    options[:beta_type] = "Alpha"
+    options[:slack_icon] = "https://i.ibb.co/cTPV8rL/google-play.png"
+  elsif lane.to_s=="publishCrashlytics"
+    options[:beta_type] = "Crashlytics"
+    options[:slack_icon] = "https://i.ibb.co/FV86BBR/image-2.png"
+  elsif lane.to_s=="publishFirebase"
+    options[:beta_type] = "Firebase"
+    options[:slack_icon] = "https://i.ibb.co/FV86BBR/image-2.png"
+  elsif lane.to_s=="publishHuawei"
+      options[:beta_type] = "Huawei"
+     options[:slack_icon] = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Huawei_AppGallery.svg/1200px-Huawei_AppGallery.svg.png"
+
+  end
+
+  if is_ci
+    options[:msg] = "build successful"
+    options[:is_success] = true
+#     send_slack(options)
+    reset_git_repo(force: true)
+    cleanRepo()
+  end
+
+end
+
+#send slack message after failure build with the details
+error do |lane, exception, options|
+  if is_ci
+    options[:msg] = "build failed"
+    options[:is_success] = false
+    UI.error "Lane: #{lane} - Exception: #{exception}"
+#     send_slack_fail(options)
+    cleanRepo()
+    reset_git_repo(force: true)
+
+  end
+end
