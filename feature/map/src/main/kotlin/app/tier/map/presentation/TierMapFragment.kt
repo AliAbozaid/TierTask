@@ -119,8 +119,6 @@ class TierMapFragment : Fragment(R.layout.fragment_tier_map) {
                 MAP_ZOOM_LEVEL_BIG
             )
             openDetails(viewModel.getScooter(vehicleClusterItem))
-            // TODO open details
-            // TODO tracking
             false
         }
         clusterManager.algorithm = NonHierarchicalDistanceBasedAlgorithm()
@@ -271,7 +269,6 @@ class TierMapFragment : Fragment(R.layout.fragment_tier_map) {
             viewModel.vehiclesStateFlow.collect { resource ->
                 when (resource) {
                     is ResourceUi.Failure -> {
-                        // TODO tracking
                         requireContext().showErrorSnackBar(
                             container = binding.container,
                             message = getString(R.string.internet_connection),
@@ -295,6 +292,7 @@ class TierMapFragment : Fragment(R.layout.fragment_tier_map) {
     }
 
     private fun openDetails(scooter: Scooter) {
+        // TODO tracking
         findNavController().navigate(
             R.id.scooter_details_navigation,
             ScooterDetailFragmentArgs(
