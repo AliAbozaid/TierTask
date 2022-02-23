@@ -27,7 +27,7 @@ bundle exec fastlane Alpha build_type:Release release_notes:'Test1' beta_group:'
 For Huawei use `publishHuawei` like below but add your store keys first to env
 
 ```
-bundle exec fastlane Alpha build_type:Release release_notes:'Test1' beta_group:'Test' version_code:2 version_name:'0.0.1' --env release
+bundle exec fastlane publishHuawei build_type:Release release_notes:'Test1' beta_group:'Test' version_code:2 version_name:'0.0.1' --env release
 ```
 
 ## Developed by
