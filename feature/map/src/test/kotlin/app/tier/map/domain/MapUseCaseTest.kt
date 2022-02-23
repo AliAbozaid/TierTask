@@ -2,7 +2,7 @@ package app.tier.map.domain
 
 import app.tier.map.data.repository.MapRepositoryImpl
 import app.tier.model.BatteryStatus
-import app.tier.model.Current
+import app.tier.model.Scooter
 import app.tier.utils.Resource
 import com.google.android.gms.maps.model.LatLng
 import io.mockk.coEvery
@@ -18,10 +18,10 @@ class MapUseCaseTest {
     private lateinit var mapUseCase: MapUseCase
     private val mapRepository: MapRepositoryImpl = mockk(relaxed = true)
 
-    private val currents = mutableListOf<Current>()
+    private val currents = mutableListOf<Scooter>()
         .apply {
             add(
-                Current(
+                Scooter(
                     id = "6348dfa0-1b20-40ed-98e9-fe9e232b6105",
                     vehicleId = "8ece0495-bef0-4eac-a58e-dede2bf975a3",
                     hardwareId = "868446031763952",

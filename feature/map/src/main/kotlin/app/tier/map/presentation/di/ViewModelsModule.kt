@@ -9,7 +9,8 @@ val viewModelsModule = module {
     viewModel {
         TierMapViewModel(
             mapUseCase = get(),
-            dispatcher = get()
+            dispatcher = get(),
+            crashlyticsLogger = get()
         )
     }
 }

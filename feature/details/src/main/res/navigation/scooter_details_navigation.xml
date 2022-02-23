@@ -12,7 +12,7 @@
 		tools:layout="@layout/fragment_scooter_details" >
 		<argument
 			android:name="scooter"
-			app:argType="app.tier.model.Current"
+			app:argType="app.tier.model.Scooter"
 			app:nullable="false" />
 	</dialog>
 </navigation>

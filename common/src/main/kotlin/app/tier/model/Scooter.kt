@@ -8,7 +8,7 @@ import kotlin.math.roundToInt
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Current(
+data class Scooter(
     val id: String,
     val vehicleId: String,
     val hardwareId: String,

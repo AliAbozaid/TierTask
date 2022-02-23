@@ -17,7 +17,7 @@ import app.tier.map.databinding.FragmentTierMapBinding
 import app.tier.map.presentation.cluster.MapBoundMeasurements
 import app.tier.map.presentation.cluster.MarkerClusterRenderer
 import app.tier.map.presentation.cluster.VehicleClusterItem
-import app.tier.model.Current
+import app.tier.model.Scooter
 import app.tier.utils.Permission
 import app.tier.utils.ResourceUi
 import app.tier.utils.bitmapDescriptorFromVector
@@ -119,8 +119,6 @@ class TierMapFragment : Fragment(R.layout.fragment_tier_map) {
                 MAP_ZOOM_LEVEL_BIG
             )
             openDetails(viewModel.getScooter(vehicleClusterItem))
-            // TODO open details
-            // TODO tracking
             false
         }
         clusterManager.algorithm = NonHierarchicalDistanceBasedAlgorithm()
@@ -197,7 +195,7 @@ class TierMapFragment : Fragment(R.layout.fragment_tier_map) {
             when (it) {
                 is ResourceUi.Failure -> {
                     binding.location.isVisible = false
-                    // TODO tracking
+                    viewModel.logRetrieveLocationException(it.error)
                     requireContext().showErrorSnackBar(
                         container = binding.container,
                         message = getString(R.string.location_gps_not_enabled),
@@ -271,7 +269,6 @@ class TierMapFragment : Fragment(R.layout.fragment_tier_map) {
             viewModel.vehiclesStateFlow.collect { resource ->
                 when (resource) {
                     is ResourceUi.Failure -> {
-                        // TODO tracking
                         requireContext().showErrorSnackBar(
                             container = binding.container,
                             message = getString(R.string.internet_connection),
@@ -294,11 +291,12 @@ class TierMapFragment : Fragment(R.layout.fragment_tier_map) {
         }
     }
 
-    private fun openDetails(current: Current) {
+    private fun openDetails(scooter: Scooter) {
+        // TODO tracking
         findNavController().navigate(
             R.id.scooter_details_navigation,
             ScooterDetailFragmentArgs(
-                scooter = current
+                scooter = scooter
             ).toBundle()
         )
     }

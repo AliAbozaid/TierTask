@@ -7,7 +7,8 @@ import app.tier.map.domain.MapUseCase
 import app.tier.map.presentation.cluster.VehicleClusterItem
 import app.tier.map.presentation.cluster.toScooter
 import app.tier.map.presentation.cluster.toVehicleClusterItem
-import app.tier.model.Current
+import app.tier.model.Scooter
+import app.tier.utils.CrashlyticsLogger
 import app.tier.utils.Dispatcher
 import app.tier.utils.Resource
 import app.tier.utils.ResourceUi
@@ -18,7 +19,8 @@ import kotlinx.coroutines.launch
 
 class TierMapViewModel constructor(
     private val mapUseCase: MapUseCase,
-    private val dispatcher: Dispatcher
+    private val dispatcher: Dispatcher,
+    private val crashlyticsLogger: CrashlyticsLogger,
 ) : ViewModel() {
 
     private val _vehiclesStateFlow =
@@ -50,11 +52,16 @@ class TierMapViewModel constructor(
                 is Resource.Error -> {
                     _vehiclesStateFlow.value =
                         ResourceUi.error(response.throwable)
+                    crashlyticsLogger.logException(response.throwable)
                 }
             }
         }
     }
 
-    fun getScooter(vehicleClusterItem: VehicleClusterItem): Current =
+    fun logRetrieveLocationException(throwable: Throwable) {
+        crashlyticsLogger.logException(throwable)
+    }
+
+    fun getScooter(vehicleClusterItem: VehicleClusterItem): Scooter =
         vehicleClusterItem.toScooter()
 }
