@@ -15,7 +15,6 @@ configure<DetektExtension> {
     config = files("$rootDir/.detekt/detekt.yml")
     parallel = true
     ignoredBuildTypes = listOf("release")
-    ignoredFlavors = listOf("staging", "production")
 }
 
 tasks.withType<Detekt>().configureEach {
