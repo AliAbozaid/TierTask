@@ -2,11 +2,11 @@ package app.tier.map.data.mapper
 
 import app.tier.map.data.entity.CurrentEntity
 import app.tier.model.BatteryStatus
-import app.tier.model.Current
+import app.tier.model.Scooter
 import com.google.android.gms.maps.model.LatLng
 
-fun CurrentEntity.mapToCurrent(): Current =
-    Current(
+fun CurrentEntity.mapToCurrent(): Scooter =
+    Scooter(
         id = id.orEmpty(),
         vehicleId = vehicleId.orEmpty(),
         hardwareId = hardwareId.orEmpty(),

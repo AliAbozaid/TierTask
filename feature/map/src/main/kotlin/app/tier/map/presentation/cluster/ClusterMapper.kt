@@ -1,10 +1,10 @@
 package app.tier.map.presentation.cluster
 
 import app.tier.model.BatteryStatus
-import app.tier.model.Current
+import app.tier.model.Scooter
 import com.google.android.gms.maps.model.LatLng
 
-fun Current.toVehicleClusterItem(currentLocation: LatLng?): VehicleClusterItem =
+fun Scooter.toVehicleClusterItem(currentLocation: LatLng?): VehicleClusterItem =
     VehicleClusterItem.Builder(
         position = position,
         title = getTitle(currentLocation),
@@ -25,8 +25,8 @@ fun Current.toVehicleClusterItem(currentLocation: LatLng?): VehicleClusterItem =
         .batteryStatus(batteryStatus)
         .build()
 
-fun VehicleClusterItem.toScooter(): Current =
-    Current(
+fun VehicleClusterItem.toScooter(): Scooter =
+    Scooter(
         id = id,
         vehicleId = vehicleId.orEmpty(),
         hardwareId = hardwareId.orEmpty(),

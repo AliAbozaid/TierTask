@@ -17,7 +17,7 @@ import app.tier.map.databinding.FragmentTierMapBinding
 import app.tier.map.presentation.cluster.MapBoundMeasurements
 import app.tier.map.presentation.cluster.MarkerClusterRenderer
 import app.tier.map.presentation.cluster.VehicleClusterItem
-import app.tier.model.Current
+import app.tier.model.Scooter
 import app.tier.utils.Permission
 import app.tier.utils.ResourceUi
 import app.tier.utils.bitmapDescriptorFromVector
@@ -294,11 +294,11 @@ class TierMapFragment : Fragment(R.layout.fragment_tier_map) {
         }
     }
 
-    private fun openDetails(current: Current) {
+    private fun openDetails(scooter: Scooter) {
         findNavController().navigate(
             R.id.scooter_details_navigation,
             ScooterDetailFragmentArgs(
-                scooter = current
+                scooter = scooter
             ).toBundle()
         )
     }

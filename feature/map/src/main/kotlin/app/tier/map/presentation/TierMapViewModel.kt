@@ -7,7 +7,7 @@ import app.tier.map.domain.MapUseCase
 import app.tier.map.presentation.cluster.VehicleClusterItem
 import app.tier.map.presentation.cluster.toScooter
 import app.tier.map.presentation.cluster.toVehicleClusterItem
-import app.tier.model.Current
+import app.tier.model.Scooter
 import app.tier.utils.Dispatcher
 import app.tier.utils.Resource
 import app.tier.utils.ResourceUi
@@ -55,6 +55,6 @@ class TierMapViewModel constructor(
         }
     }
 
-    fun getScooter(vehicleClusterItem: VehicleClusterItem): Current =
+    fun getScooter(vehicleClusterItem: VehicleClusterItem): Scooter =
         vehicleClusterItem.toScooter()
 }

@@ -3,7 +3,7 @@ package app.tier.map.presentation
 import app.tier.map.base.DispatcherImplTest
 import app.tier.map.domain.MapUseCase
 import app.tier.model.BatteryStatus
-import app.tier.model.Current
+import app.tier.model.Scooter
 import app.tier.utils.Resource
 import app.tier.utils.ResourceUi
 import com.google.android.gms.maps.model.LatLng
@@ -20,10 +20,10 @@ class TierMapViewModelTest {
     private val mapUseCase: MapUseCase = mockk(relaxed = true)
     private val dispatcher = DispatcherImplTest()
 
-    private val currents = mutableListOf<Current>()
+    private val currents = mutableListOf<Scooter>()
         .apply {
             add(
-                Current(
+                Scooter(
                     id = "6348dfa0-1b20-40ed-98e9-fe9e232b6105",
                     vehicleId = "8ece0495-bef0-4eac-a58e-dede2bf975a3",
                     hardwareId = "868446031763952",
