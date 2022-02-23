@@ -7,5 +7,6 @@
 	<color name="app_toolbar_text">@color/black</color>
 	<color name="ic_marker_color">#FF101C4F</color>
 	<color name="text_color">#FF101C4F</color>
+	<color name="button_bg">@color/text_color</color>
 
 </resources>
