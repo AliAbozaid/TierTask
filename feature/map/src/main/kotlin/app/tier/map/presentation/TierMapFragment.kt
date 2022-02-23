@@ -197,7 +197,7 @@ class TierMapFragment : Fragment(R.layout.fragment_tier_map) {
             when (it) {
                 is ResourceUi.Failure -> {
                     binding.location.isVisible = false
-                    // TODO tracking
+                    viewModel.logRetrieveLocationException(it.error)
                     requireContext().showErrorSnackBar(
                         container = binding.container,
                         message = getString(R.string.location_gps_not_enabled),

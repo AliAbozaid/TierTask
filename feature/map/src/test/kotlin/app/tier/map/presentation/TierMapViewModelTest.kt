@@ -4,12 +4,14 @@ import app.tier.map.base.DispatcherImplTest
 import app.tier.map.domain.MapUseCase
 import app.tier.model.BatteryStatus
 import app.tier.model.Scooter
+import app.tier.utils.CrashlyticsLogger
 import app.tier.utils.Resource
 import app.tier.utils.ResourceUi
 import com.google.android.gms.maps.model.LatLng
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
+import io.mockk.verify
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.MatcherAssert
 import org.junit.Assert
@@ -18,6 +20,7 @@ import org.junit.Test
 class TierMapViewModelTest {
     private lateinit var tierMapViewModel: TierMapViewModel
     private val mapUseCase: MapUseCase = mockk(relaxed = true)
+    private val crashlyticsLogger: CrashlyticsLogger = mockk(relaxed = true)
     private val dispatcher = DispatcherImplTest()
 
     private val currents = mutableListOf<Scooter>()
@@ -48,7 +51,7 @@ class TierMapViewModelTest {
                 currents
             )
         )
-        tierMapViewModel = TierMapViewModel(mapUseCase, dispatcher)
+        tierMapViewModel = TierMapViewModel(mapUseCase, dispatcher, crashlyticsLogger)
         coVerify { mapUseCase.getTierVehicles() }
     }
 
@@ -60,7 +63,7 @@ class TierMapViewModelTest {
                     currents
                 )
             )
-            tierMapViewModel = TierMapViewModel(mapUseCase, dispatcher)
+            tierMapViewModel = TierMapViewModel(mapUseCase, dispatcher, crashlyticsLogger)
             MatcherAssert.assertThat(
                 "",
                 tierMapViewModel.vehiclesStateFlow.value is ResourceUi.Success
@@ -77,7 +80,7 @@ class TierMapViewModelTest {
             coEvery { mapUseCase.getTierVehicles() }.returns(
                 Resource.Error(Throwable(ERROR_MESSAGE))
             )
-            tierMapViewModel = TierMapViewModel(mapUseCase, dispatcher)
+            tierMapViewModel = TierMapViewModel(mapUseCase, dispatcher, crashlyticsLogger)
             MatcherAssert.assertThat(
                 "",
                 tierMapViewModel.vehiclesStateFlow.value is ResourceUi.Failure
@@ -89,6 +92,7 @@ class TierMapViewModelTest {
                     ).error.message,
                 ERROR_MESSAGE
             )
+            verify { crashlyticsLogger.logException(any()) }
         }
 
     companion object {
